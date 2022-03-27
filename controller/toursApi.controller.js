@@ -7,7 +7,7 @@ const schema = yup.object({
     cancelacion: yup.bool().required(),
     idioma: yup.string('el idioma no puede tener numeros').required("El idioma es obligatorio").min(3, 'El idioma tiene que tener al menos 3 caracteres').max(70, 'el idioma no puede superar los 70 caracteres'),
     duracion: yup.number('la duracion debe contener numeros').required(),
-    incluido: yup.array().required(), 
+    incluido: yup.array().nullable(), 
     precioReserva: yup.number('el precio solo puede contener numeros').required("El precio de la reserva es obligatorio"),
     categoria: yup.string('la categoria  debe estar compuesto por cadena de texto').required(),
     fechaActividad: yup.date('la fecha de la actividad tiene que tener formato fecha').required(),

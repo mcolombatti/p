@@ -31,13 +31,14 @@ return (
   <TableContainer component={Paper}>
     <Table sx={{ minWidth: 650 }} aria-label="simple table">
       <TableHead>
-        <TableRow>
-          <TableCell>DNI</TableCell>
-          <TableCell align="right">Nombre</TableCell>
-          <TableCell align="right">Detalles</TableCell>
-          <TableCell align="right">Editar</TableCell>
-          <TableCell align="right">Capacitaciones</TableCell>
-          <TableCell align="right">Eliminar</TableCell>
+        <TableRow> 
+          <TableCell align="right">Id</TableCell>
+          <TableCell align="right">Titulo</TableCell>
+          <TableCell align="right">Precio</TableCell>
+          <TableCell align="right">Categoria</TableCell>  
+          <TableCell align="right">Detalles</TableCell>  
+          <TableCell align="right">Editar</TableCell>  
+          <TableCell align="right">Eliminar</TableCell>  
         </TableRow>
       </TableHead>
       <TableBody>
@@ -45,23 +46,26 @@ return (
         {tours?.map(tour => (
         <TableRow key={tour._id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
           <TableCell component="th" scope="row">
-            {tour.dni}
+            {tour._id}
           </TableCell>
           <TableCell component="th" scope="row">
-            {tour.apellido} {tour.name}
+            {tour.titulo}  
+          </TableCell>
+          <TableCell component="th" scope="row">
+            {tour.precioReserva }  
+          </TableCell>
+          <TableCell component="th" scope="row">
+            {tour.categoria}  
           </TableCell>
           <TableCell component="th" scope="row">
             <Link className="btn-detail" tour={tour} style={{"marginTop": "2em" }}
               to={`/tours/${tour._id}`}>Ver detalles</Link>
           </TableCell>
           <TableCell component="th" scope="row">
-            <Link className="btn-detail" className="btn-detail" style={{"marginTop": "2em" }}
+            <Link className="btn-detail"  style={{"marginTop": "2em" }}
               to={`/tours/${tour._id}/edit`}> Editar </Link>
           </TableCell>
-          <TableCell component="th" scope="row">
-            <Link className="btn-detail" tour={tour} style={{"marginTop": "2em" }}
-              to={`/tours/assign/${tour._id}`}>Asignar capacitacion</Link>
-          </TableCell>
+           
           <TableCell component="th" scope="row">
             <EliminarTour tour={tour} />
           </TableCell>

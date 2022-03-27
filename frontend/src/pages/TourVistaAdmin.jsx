@@ -19,10 +19,17 @@ const Tour = () => {
     return (<div>
       
       <h3>Id: {tour._id}</h3>
-      <p>nombre: {tour.name}</p>
-      <p>email: {tour.email}</p>
-      <p>dni: {tour.dni}</p>
-      <p>fecha de nacimiento: {tour.fechanac}</p> 
+      <p>titulo: {tour.titulo}</p>
+      <p>descripcion: {tour.descripcion}</p>
+      <p>cancelacion: {tour.cancelacion}</p>
+      <p>idioma: {tour.idioma}</p> 
+      <p>duracion: {tour.duracion}</p>
+      <p>Incluye: {tour.incluido}</p> 
+      <p>precioReserva: {tour.precioReserva}</p> 
+      <p>categoria: {tour.categoria}</p> 
+      <p>fechaActividad: {tour.fechaActividad}</p> 
+      <p>horaActividad: {tour.horaActividad}</p> 
+      <p>minutosActividad: {tour.minutosActividad}</p> 
        
       <CapacitacionTour key={tour._id} tour={tour}  className= "MuiButton-root btn MuiButton-contained MuiButton-containedSecondary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButtonBase-root  css-zcbmsk-MuiButtonBase-root-MuiButton-root" 
        style={{"marginTop": "2em" }}

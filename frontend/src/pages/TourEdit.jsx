@@ -44,7 +44,7 @@ const [fechanac, setFechaNac] = useState('');
           required type="text"
           {...register("name")}
           
-          id="outlined-required" required
+          id="outlined-required" 
           label="Nombre del tour"onChange={(e)=> setName(e.target.value)}
           defaultValue={name}
           
@@ -55,7 +55,7 @@ const [fechanac, setFechaNac] = useState('');
           required type="text"
           {...register("apellido")}
           
-          id="outlined-required" required
+          id="outlined-required" 
           label="Apellido  del tour"onChange={(e)=> setApellido(e.target.value)}
           defaultValue={apellido}
           
@@ -67,7 +67,7 @@ const [fechanac, setFechaNac] = useState('');
           required type="email"
           {...register("email")}
           
-          id="outlined-required" required
+          id="outlined-required" 
           label="Email"onChange={(e)=> setEmail(e.target.value)}
           defaultValue={email}
           
@@ -79,7 +79,7 @@ const [fechanac, setFechaNac] = useState('');
           inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} 
           {...register("dni")}
           
-          id="outlined-required" required
+          id="outlined-required" 
           label="dni"onChange={(e)=> setDni(e.target.value)}
           defaultValue={dni}
           

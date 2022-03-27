@@ -37,20 +37,7 @@ export function ToursProvider(props) {
             throw new Error('Error al eliminar el tour');
         });
     } 
-    const agregarFav = async (userId, beneficio) => {
-           
-            
-      return API.agregarBeneficioFavoritos(userId,beneficio)
-      .then(()=>{
-
-        toast.success('¡Beneficio agregado a favoritos!') 
-      })
-      .catch(() => {   
-          
-  toast.error('Hubo un problema al agregar el beneficio a favoritos ')
-          throw new Error('Error al agregar el beneficio a favoritos ');
-      });
-  }  
+     
     const create = async (tour) => {
          
           
@@ -108,22 +95,9 @@ export function ToursProvider(props) {
         return { state  };
       }; 
        
-const assign = async (id, capacitacion) => {
-    return API.assignCapacitacionTour(id, capacitacion)
-    .then(()=>{
-
-      toast.success('Se creo con exito la capacitacion del tour')
-      navigate('/tours')
-    })
-    .catch(() => {   
-        
-toast.error('Hubo un problema al crear la capacitacion del tour')
-        throw new Error('Error al  crear la capacitacion del tour');
-    });
-   
-  }
+ 
     return (
-                <ToursContext.Provider value={{ tours, agregarFav, edit, setTours, remove, create, useIdFetch, assign}}>
+                <ToursContext.Provider value={{ tours,  edit, setTours, remove, create, useIdFetch }}>
             {props.children}
         </ToursContext.Provider>
     );
