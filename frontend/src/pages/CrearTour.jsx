@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useEmpleados, EmpleadosProvider } from '../context/Empleados.Context';
+import { useTours, ToursProvider } from '../context/Tours.Context';
 import { Button } from '@mui/material'; 
 import TextField from '@mui/material/TextField';
 import { useForm } from "react-hook-form";
@@ -19,16 +19,16 @@ function Create() {
   const { register, handleSubmit, formState: { errors }, reset } = useForm({
     resolver: yupResolver(schema),
   });
-const { empleados, create } = useEmpleados();
+const { tours, create } = useTours();
 const [name, setName] = useState('');
 const [email, setEmail] = useState('');
 const [dni, setDni] = useState(''); 
 const [apellido, setApellido] = useState('');
 const [fechanac, setFechaNac] = useState('');
- const empleado = {name, email, dni,fechanac,apellido}
+ const tour = {name, email, dni,fechanac,apellido}
  
 const onSubmitHandler = data => {
-  create(empleado) 
+  create(tour) 
   console.log(data)
 };
  
@@ -43,7 +43,7 @@ return (
           {...register("name")}
           
           id="outlined-required" required
-          label="Nombre del Empleado"onChange={(e)=> setName(e.target.value)}
+          label="Nombre del tour"onChange={(e)=> setName(e.target.value)}
           defaultValue={name}
           
           
@@ -54,7 +54,7 @@ return (
           {...register("apellido")}
           
           id="outlined-required" required
-          label="Apellido  del Empleado"onChange={(e)=> setApellido(e.target.value)}
+          label="Apellido  del tour"onChange={(e)=> setApellido(e.target.value)}
           defaultValue={apellido}
           
           
@@ -89,7 +89,7 @@ return (
 <div className='MuiFormControl-root MuiTextField-root css-1u3bzj6-MuiFormControl-root-MuiTextField-root'>
              <div className='calendario MuiOutlinedInput-root MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-formControl css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root'>
                
-                         <label className='MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline' htmlFor="fechanac">Fecha de Nacimiento del Empleado</label>
+                         <label className='MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline' htmlFor="fechanac">Fecha de Nacimiento del tour</label>
                          <input className='MuiOutlinedInput-input MuiInputBase-input css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input' {...register("fechanac")} type="date" value={fechanac}  required onChange={(e)=> setFechaNac(e.target.value)}/>
                            <p  className="is-danger">{errors.fechanac?.message}</p>
              </div>
@@ -114,10 +114,10 @@ return (
 function CreatePage(props) {
 return (
 <div>
-    <h2>Crear un Empleado</h2>
-    <EmpleadosProvider>
+    <h2>Crear un tour</h2>
+    <ToursProvider>
         <Create />
-    </EmpleadosProvider>
+    </ToursProvider>
 </div>
 )
 }

@@ -1,9 +1,9 @@
 import { useState,Fragment, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { useEmpleados, EmpleadosProvider } from '../context/Empleados.Context';
-import Empleado from './EmpleadoVistaAdmin';
-import EliminarEmpleado from './EliminarEmpleado';
-import CrearEmpleado from './CrearEmpleado';
+import { useTours, ToursProvider } from '../context/Tours.Context';
+import Tour from './TourVistaAdmin';
+import EliminarTour from './EliminarTour';
+import CrearTour from './CrearTour';
 
 import { ToastContainer, toast } from 'react-toastify';
 
@@ -17,13 +17,13 @@ import Paper from '@mui/material/Paper';
 import AddIcon from '@mui/icons-material/Add';
 import IconButton from '@mui/material/IconButton'; 
 
-export const EmpleadoList = () => {
-const { empleados, } = useEmpleados();
+export const TourList = () => {
+const { tours, } = useTours();
 return (
 <div>
   <div id="icon-add-container">
     <IconButton color="success" size="large" aria-label="add">
-      <Link to={`/empleados/nuevo`}>
+      <Link to={`/tours/nuevo`}>
       <AddIcon id="btn-add" />
       </Link>
     </IconButton>
@@ -42,28 +42,28 @@ return (
       </TableHead>
       <TableBody>
 
-        {empleados?.map(empleado => (
-        <TableRow key={empleado._id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+        {tours?.map(tour => (
+        <TableRow key={tour._id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
           <TableCell component="th" scope="row">
-            {empleado.dni}
+            {tour.dni}
           </TableCell>
           <TableCell component="th" scope="row">
-            {empleado.apellido} {empleado.name}
+            {tour.apellido} {tour.name}
           </TableCell>
           <TableCell component="th" scope="row">
-            <Link className="btn-detail" empleado={empleado} style={{"marginTop": "2em" }}
-              to={`/empleados/${empleado._id}`}>Ver detalles</Link>
+            <Link className="btn-detail" tour={tour} style={{"marginTop": "2em" }}
+              to={`/tours/${tour._id}`}>Ver detalles</Link>
           </TableCell>
           <TableCell component="th" scope="row">
             <Link className="btn-detail" className="btn-detail" style={{"marginTop": "2em" }}
-              to={`/empleados/${empleado._id}/edit`}> Editar </Link>
+              to={`/tours/${tour._id}/edit`}> Editar </Link>
           </TableCell>
           <TableCell component="th" scope="row">
-            <Link className="btn-detail" empleado={empleado} style={{"marginTop": "2em" }}
-              to={`/empleados/assign/${empleado._id}`}>Asignar capacitacion</Link>
+            <Link className="btn-detail" tour={tour} style={{"marginTop": "2em" }}
+              to={`/tours/assign/${tour._id}`}>Asignar capacitacion</Link>
           </TableCell>
           <TableCell component="th" scope="row">
-            <EliminarEmpleado empleado={empleado} />
+            <EliminarTour tour={tour} />
           </TableCell>
         </TableRow>
         ))}
@@ -77,14 +77,14 @@ return (
 }
 
 
-function EmpleadosPage(props) {
+function ToursPage(props) {
 return (
 <div>
-  <h1>Empleados</h1>
-  <EmpleadosProvider>
-    <EmpleadoList />
-  </EmpleadosProvider>
+  <h1>Tours</h1>
+  <ToursProvider>
+    <TourList />
+  </ToursProvider>
 </div>
 )
 }
-export default EmpleadosPage;
+export default ToursPage;

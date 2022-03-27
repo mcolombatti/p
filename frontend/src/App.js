@@ -5,11 +5,8 @@ import { Routes, Route, Link, Navigate, useNavigate } from 'react-router-dom';
 import Login from './pages/Login'
 import Register from './pages/Register'
 import Logout from './pages/Logout'
-import CrearBeneficio from './pages/CrearBeneficio'
-import CrearEmpleado from './pages/CrearEmpleado'
-import CapacitacionesEmpleado from './pages/CapacitacionesEmpleado'
-import EmpleadoEdit from './pages/EmpleadoEdit'
-import AssignCapacitacion from './pages/AsignarCapacitacion'
+import CrearTour from './pages/CrearTour'
+import TourEdit from './pages/TourEdit'
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -19,12 +16,9 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
-import Empleados from './pages/EmpleadosVistaAdmin';
-import DetailsEmpleado from './pages/EmpleadoVistaAdmin';
-import Beneficios from './pages/BeneficiosVistaEmpleado'
-import BeneficiosAdmin from './pages/BeneficiosVistaAdmin'
+import Tours from './pages/ToursVistaAdmin';
+import DetailsTour from './pages/TourVistaAdmin';
 import Home from './pages/Home'
-import BeneficiosFav from './pages/BeneficiosFav'
 import { useAuth } from './context/Auth.Context'
 import { style } from '@mui/system';
 
@@ -110,13 +104,9 @@ function App(props) {
 
                 </NoNavAuth>
                 <NavAuth>
-                  <NavRole> <Button color="inherit"> <Link to="/empleados">Empleados</Link></Button></NavRole>
-                  <NavRole> <Button color="inherit"><Link to="/lista-beneficios">Beneficios</Link></Button></NavRole>
-                  <Button color="inherit"> <Link to="/">Home</Link></Button>
-                  <NoNavRole><Button color="inherit"> <Link to="/empleado/capacitaciones">Capacitaciones</Link></Button></NoNavRole>
-                  <NoNavRole><Button color="inherit"> <Link to="/beneficios/favoritos">Mis favoritos</Link></Button></NoNavRole>
-                  <NoNavRole><Button color="inherit"> <Link to="/beneficios">Beneficios</Link></Button></NoNavRole>
-                   <Logout /> 
+                  <NavRole> <Button color="inherit"> <Link to="/tours">Tours</Link></Button></NavRole>
+                   <Button color="inherit"> <Link to="/">Home</Link></Button>
+                       <Logout /> 
 
                 </NavAuth>
               </div>
@@ -134,23 +124,17 @@ function App(props) {
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password/:id/:token" element={<ResetPassword />} />
 
-          <Route path="/empleados" element={
-            <AuthRoute> <AuthRole><Empleados /></AuthRole></AuthRoute>
+          <Route path="/tours" element={
+            <AuthRoute> <AuthRole><Tours /></AuthRole></AuthRoute>
           } />
-          <Route path="/lista-beneficios" element={
-            <AuthRoute> <AuthRole><BeneficiosAdmin /></AuthRole></AuthRoute>
-          } />
-          <Route path="/empleados/nuevo" element={
-            <AuthRoute><CrearEmpleado /></AuthRoute>
-          } /> <Route path="/beneficios/nuevo" element={
-            <AuthRoute><CrearBeneficio /></AuthRoute>
-          } />
-          <Route path="/beneficios" element={<AuthRoute><Beneficios /></AuthRoute>} />
-          <Route path="/beneficios/favoritos" element={<AuthRoute><BeneficiosFav /></AuthRoute>} />
-          <Route path="/empleados/:id" element={<AuthRoute><DetailsEmpleado /></AuthRoute>} />
-          <Route path="/empleados/:id/edit"   element={<AuthRoute><EmpleadoEdit /></AuthRoute>} />
-          <Route path="/empleados/assign/:id" element={<AuthRoute><AssignCapacitacion /></AuthRoute>} />
-          <Route path="/empleado/capacitaciones" element={<AuthRoute><CapacitacionesEmpleado /></AuthRoute>} /> 
+          
+          <Route path="/tours/nuevo" element={
+            <AuthRoute><CrearTour /></AuthRoute>
+          } /> 
+         
+          <Route path="/tours/:id" element={<AuthRoute><DetailsTour /></AuthRoute>} />
+          <Route path="/tours/:id/edit"   element={<AuthRoute><TourEdit /></AuthRoute>} />
+          
           <Route path="/404" element={<h1>Sitio no encontrado</h1>} />
           <Route path="*" element={<Navigate to="/404" />} />
         </Routes>

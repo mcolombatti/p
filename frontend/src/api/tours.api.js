@@ -1,7 +1,7 @@
 import config from '../config/config';
 
-export async function deleteEmpleado(id) {
-    return fetch(`${config.api.url}empleados/${id}`, {
+export async function deleteTour(id) {
+    return fetch(`${config.api.url}/tours/${id}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
@@ -18,8 +18,8 @@ export async function deleteEmpleado(id) {
             }
         })
 }
-export async function getEmpleados() {
-    return fetch(`${config.api.url}empleados/`, {
+export async function getTours() {
+    return fetch(`${config.api.url}/tours`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -36,14 +36,14 @@ export async function getEmpleados() {
             }
         })
 }
-export async function createEmpleado(empleado) {
-    return fetch(`${config.api.url}empleados/`, {
+export async function createTour(tour) {
+    return fetch(`${config.api.url}/tours/`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             'auth-token': `${localStorage.getItem('token')}`
         },
-        body: JSON.stringify(empleado)
+        body: JSON.stringify(tour)
     })
         .then(function (res) {
             res.json({ msg: "Usuario registrado satisfactoriamente" })
@@ -59,8 +59,8 @@ export async function createEmpleado(empleado) {
         })
 }
 
-export async function getEmpleadoDetails(id) {
-    return fetch(`${config.api.url}empleados/${id}`, {
+export async function getTourDetails(id) {
+    return fetch(`${config.api.url}/tours/${id}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -77,8 +77,8 @@ export async function getEmpleadoDetails(id) {
             }
         })
 }
-export async function assignCapacitacionEmpleado(id, capacitacion) {
-    return fetch(`${config.api.url}empleados/${id}/capacitaciones`, {
+export async function assignCapacitacionTour(id, capacitacion) {
+    return fetch(`${config.api.url}/tours/${id}/capacitaciones`, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
@@ -97,7 +97,7 @@ export async function assignCapacitacionEmpleado(id, capacitacion) {
 }
 
 export async function completarCapacitacion(id) {
-    return fetch(`${config.api.url}empleados/${id}/capacitaciones/estado`, {
+    return fetch(`${config.api.url}/tours/${id}/capacitaciones/estado`, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
@@ -114,14 +114,14 @@ export async function completarCapacitacion(id) {
             }
         })
 }
-export async function editEmpleado(id, empleado) {
-    return fetch(`${config.api.url}empleados/${id}`, {
+export async function editTour(id, tour) {
+    return fetch(`${config.api.url}/tours/${id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
             'auth-token': `${localStorage.getItem('token')}`
         },
-        body: JSON.stringify(empleado)
+        body: JSON.stringify(tour)
     })
         .then(function (res) {
             if (res.status === 200) {
@@ -133,7 +133,7 @@ export async function editEmpleado(id, empleado) {
         })
 }
 export async function agregarBeneficioFavoritos(userId, beneficio) {
-    return fetch(`${config.api.url}empleados/${userId}/favoritos`, {
+    return fetch(`${config.api.url}/tours/${userId}/favoritos`, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
@@ -151,5 +151,5 @@ export async function agregarBeneficioFavoritos(userId, beneficio) {
         })
 }
 export default {
-    agregarBeneficioFavoritos, deleteEmpleado, editEmpleado, getEmpleados, createEmpleado, completarCapacitacion, getEmpleadoDetails, assignCapacitacionEmpleado
+    agregarBeneficioFavoritos, deleteTour, editTour, getTours, createTour, completarCapacitacion, getTourDetails, assignCapacitacionTour
 }

@@ -1,6 +1,6 @@
 import {useParams, Link} from 'react-router-dom'
 import { useEffect, useState  } from 'react';
-import { useEmpleados, EmpleadosProvider } from '../context/Empleados.Context';
+import { useTours, ToursProvider } from '../context/Tours.Context';
 import { Button } from '@mui/material'; 
 import TextField from '@mui/material/TextField';
 import { useForm } from "react-hook-form";
@@ -8,7 +8,7 @@ import SendIcon from '@mui/icons-material/Send';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-const Empleado = ( ) => {
+const Tour = ( ) => {
   
   const { id } = useParams();
 const schema = yup.object().shape({
@@ -23,19 +23,19 @@ const schema = yup.object().shape({
   const { register, handleSubmit, formState: { errors }, reset } = useForm({
     resolver: yupResolver(schema),
   });
-    const { empleados, useIdFetch,edit} = useEmpleados();
+    const { tours, useIdFetch,edit} = useTours();
     
 const [name, setName] = useState('');
 const [email, setEmail] = useState('');
 const [dni, setDni] = useState(''); 
 const [apellido, setApellido] = useState('');
 const [fechanac, setFechaNac] = useState(''); 
-    const { state: empleado} = useIdFetch(id);
-    const empleadoDet = {name, email, dni,fechanac,apellido}
+    const { state: tour} = useIdFetch(id);
+    const tourDet = {name, email, dni,fechanac,apellido}
  
    const onSubmitHandler =  () => {
      
-  edit(id, empleadoDet) 
+  edit(id, tourDet) 
    };
     
     return (<div>
@@ -45,7 +45,7 @@ const [fechanac, setFechaNac] = useState('');
           {...register("name")}
           
           id="outlined-required" required
-          label="Nombre del Empleado"onChange={(e)=> setName(e.target.value)}
+          label="Nombre del tour"onChange={(e)=> setName(e.target.value)}
           defaultValue={name}
           
           
@@ -56,7 +56,7 @@ const [fechanac, setFechaNac] = useState('');
           {...register("apellido")}
           
           id="outlined-required" required
-          label="Apellido  del Empleado"onChange={(e)=> setApellido(e.target.value)}
+          label="Apellido  del tour"onChange={(e)=> setApellido(e.target.value)}
           defaultValue={apellido}
           
           
@@ -91,7 +91,7 @@ const [fechanac, setFechaNac] = useState('');
 <div className='MuiFormControl-root MuiTextField-root css-1u3bzj6-MuiFormControl-root-MuiTextField-root'>
              <div className='calendario MuiOutlinedInput-root MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-formControl css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root'>
                
-                         <label className='MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline' htmlFor="fechanac">Fecha de Nacimiento del Empleado</label>
+                         <label className='MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline' htmlFor="fechanac">Fecha de Nacimiento del tour</label>
                          <input className='MuiOutlinedInput-input MuiInputBase-input css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input' {...register("fechanac")} type="date" value={fechanac}  required onChange={(e)=> setFechaNac(e.target.value)}/>
                            <p  className="is-danger">{errors.fechanac?.message}</p>
              </div>
@@ -115,15 +115,15 @@ const [fechanac, setFechaNac] = useState('');
 
  
 
-function GetEmpleado(props) {
+function GetTour(props) {
     return (
     <div>
-        <h2>Ver detalles del Empleado </h2>
-        <EmpleadosProvider>
-        <Empleado  />   
-        </EmpleadosProvider>
+        <h2>Ver detalles del tour </h2>
+        <ToursProvider>
+        <Tour  />   
+        </ToursProvider>
     </div>
     )
 }
 
-export default GetEmpleado;
+export default GetTour;

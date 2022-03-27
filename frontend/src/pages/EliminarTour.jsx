@@ -7,11 +7,11 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
 import DeleteIcon from '@mui/icons-material/Delete';
-import { useEmpleados, EmpleadosProvider } from '../context/Empleados.Context';
+import { useTours, ToursProvider } from '../context/Tours.Context';
 export default function AlertDialog(props) {
   const [open, setOpen] = React.useState(false);
 
-  const { empleados,remove } = useEmpleados();
+  const { tours,remove } = useTours();
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -23,7 +23,7 @@ export default function AlertDialog(props) {
 
   const handleAccept = () => {
     setOpen(false);
-    remove(props.empleado)
+    remove(props.tour)
   };
 
   return (
