@@ -9,11 +9,11 @@ const route = express.Router()
 
 route.get('/', [admin_validator], toursApiController.findAll)
 
-route.get('/query', toursApiController.getTourByQuery)
+route.get('/query', [admin_validator],toursApiController.getTourByGuideId)
 route.post('/', [admin_validator], toursApiController.createTour)
 route.put('/:id', [admin_validator], toursApiController.updateTour)
 route.get('/:id', [validator], toursApiController.getTour) 
-route.delete('/:id', [admin_validator], toursApiController.deleteTour)
+route.delete('/:id', [admin_validator], toursApiController.deleteTour) 
 
 
 export default route

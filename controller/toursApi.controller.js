@@ -138,7 +138,27 @@ export async function getTour(req, res) {
  * @param req 
  * @param res 
  */
-export async function getTourByQuery(req, res) {
+export async function getTourByGuideId(req, res) {
+    toursDao.guideId(req.params.id)
+        .then(function (result) {
+            res.json(result)
+        })
+        .catch(function (err) {
+            if (err.error) {
+                res.status(400).json({ error: 400, msg: err.msg })
+            }
+            else {
+                res.status(500).json({ error: 500, msg: `Ocurrió un error inesperado ${err}` })
+            }
+        })
+}
+/**
+ * Busca todos los usuarios de la base de datos 
+ * 
+ * @param req 
+ * @param res 
+ */
+export async function getTourByGuideId(req, res) {
 
     toursDao.viewTourByQuery(req.query)
         .then(function (result) {
@@ -177,5 +197,5 @@ export async function deleteTour(req, res) {
 
   
 export default {
-     createTour, updateTour, deleteTour, createTours, findAll, getTour,  getTourByQuery
+     createTour, updateTour, getTourByGuideId,deleteTour, createTours, findAll, getTour
 };

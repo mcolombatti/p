@@ -13,6 +13,11 @@ export async function getById(id) {
         return await db.collection("Tours").findOne({ _id: mongodb.ObjectId(id) })
     })
 }
+export async function guideId(id) {
+    return connection(async function (db) {
+        return await db.collection("Tours").findOne({ userid: mongodb.ObjectId(id) })
+    })
+}
 
 export async function viewTourByQuery(query) {
 
@@ -73,7 +78,7 @@ export async function patch(id, entity) {
 export default { 
     viewAllTours,
     insertTour,
-    deleteById, patch, 
+    deleteById, patch, guideId,
     updateTourById, getById, viewTourByQuery, insertTours
 }
 

@@ -13,7 +13,7 @@ export function ToursProvider(props) {
      
  
   let navigate = useNavigate();
-    useEffect(() => {
+   /* useEffect(() => {
     
       API.getTours()
         .then(data => {
@@ -22,7 +22,7 @@ export function ToursProvider(props) {
         
      }
         
-       , []);
+       , []);*/
     
     const remove = async (tour) => {
         setTours(tours.filter(p => p._id !== tour._id))
@@ -75,7 +75,7 @@ export function ToursProvider(props) {
           const fetchTour = async () => {
             try {
              
-              const tour = await API.getTourDetails(Tourid);
+              const tour = await API.getToursByIdGuide(Tourid);
             
               setState({
                 ...tour,
@@ -94,6 +94,8 @@ export function ToursProvider(props) {
       
         return { state  };
       }; 
+       
+       
        
  
     return (

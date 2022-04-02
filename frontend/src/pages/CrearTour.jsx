@@ -26,6 +26,8 @@ function Create() {
     resolver: yupResolver(schema),
   });
 const { tours, create } = useTours();
+ 
+ 
 const [titulo, setTitulo] = useState('');
 const [descripcion, setDescripcion] = useState('');
 const [cancelacion, setCancelacion] = useState('');
@@ -37,9 +39,11 @@ const [categoria, setCategoria] = useState('');
 const [fechaActividad, setFechaActividad] = useState('');
 const [horaActividad, setHoraActividad] = useState('');
 const [minutosActividad, setMinutosActividad] = useState('');
- const tour = {titulo, descripcion, precioReserva,fechaActividad,cancelacion,horaActividad, minutosActividad, categoria, incluido, idioma,duracion}
+const userid = JSON.parse(localStorage.getItem('userid'))
+ const tour = {titulo, descripcion, precioReserva,fechaActividad,cancelacion,horaActividad, minutosActividad, categoria, incluido, idioma,duracion,userid}
  
 const onSubmitHandler = data => {
+  
   create(tour) 
   console.log(data)
 };
