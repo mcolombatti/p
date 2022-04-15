@@ -11,18 +11,29 @@ const ToursContext = createContext();
 export function ToursProvider(props) {
     const [tours, setTours] = useState()
      
+  
+     
  
-  let navigate = useNavigate();
-   /* useEffect(() => {
-    
-      API.getTours()
-        .then(data => {
+    let navigate = useNavigate();
+      useEffect(() => {
+      
+          fetch(`http://localhost:9001/api/tours/`, {
+              method: 'GET',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'auth-token': `${localStorage.getItem('token')}`
+              }
+          })
+          .then(res => {
+            return res.json();
+          })
+          .then(data => {
             setTours(data);
-        })
-        
-     }
-        
-       , []);*/
+          })
+          
+       }
+          
+         , []);
     
     const remove = async (tour) => {
         setTours(tours.filter(p => p._id !== tour._id))

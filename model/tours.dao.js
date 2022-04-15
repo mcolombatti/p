@@ -76,10 +76,10 @@ export async function patch(id, entity) {
     })
 } 
 export default { 
-    viewAllTours,
+    viewAllTours,viewTourByQuery,
     insertTour,
     deleteById, patch, guideId,
-    updateTourById, getById, viewTourByQuery, insertTours
+    updateTourById, getById,   insertTours
 }
 
 

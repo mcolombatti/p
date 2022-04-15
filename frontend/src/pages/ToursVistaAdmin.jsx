@@ -17,19 +17,11 @@ import Paper from '@mui/material/Paper';
 import AddIcon from '@mui/icons-material/Add';
 import IconButton from '@mui/material/IconButton'; 
 
-export const TourList = () => {
-  const userid = JSON.parse(localStorage.getItem('userid'))
-  const { useIdFetch } = useTours();
-
-  const { state: tours} = useIdFetch(userid);
-  console.log(tours);
+export const TourList = () => {  
+  const { tours, } = useTours(); 
   return(<div>
-    
-    <ToursInfo tours={tours} />
-  </div>)
-{/*return (
-<div>
-  {tours?.map(tour=>(tour._id))}
+     
+ 
   <div id="icon-add-container">
     <IconButton color="success" size="large" aria-label="add">
       <Link to={`/tours/nuevo`}>
@@ -85,17 +77,11 @@ export const TourList = () => {
   </TableContainer>
 
   <ToastContainer />
-</div>
-        )*/}
-}
-
-const ToursInfo = ({ tours }) => {
-  return(<div>
-{tours?.map(tour=> (<div>
-{  tour._id} </div>
-))}
+ 
   </div>)
+ 
 }
+ 
 function ToursPage(props) {
 return (
 <div>

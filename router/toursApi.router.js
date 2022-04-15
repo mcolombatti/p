@@ -7,13 +7,13 @@ import { admin_validator } from '../middleware/admin_validator.js'
 const route = express.Router()
 
 
-route.get('/', [admin_validator], toursApiController.findAll)
+route.get('/',   toursApiController.findAll)
 
-route.get('/query', [admin_validator],toursApiController.getTourByGuideId)
-route.post('/', [admin_validator], toursApiController.createTour)
-route.put('/:id', [admin_validator], toursApiController.updateTour)
+route.get('/query', toursApiController.getTourByQuery) 
+route.post('/',   toursApiController.createTour)
+route.put('/:id',   toursApiController.updateTour)
 route.get('/:id', [validator], toursApiController.getTour) 
-route.delete('/:id', [admin_validator], toursApiController.deleteTour) 
+route.delete('/:id',  toursApiController.deleteTour) 
 
 
 export default route
