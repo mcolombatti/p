@@ -5,7 +5,8 @@ export default {
      
     db: { 
         url: process.env.MONGODB,
-        dbName: process.env.DB
+        dbName: process.env.DB,
+        imgBucket: process.env.img
     },
     middleware: {
         access: process.env.MW_ACCESS || '123',

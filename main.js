@@ -1,6 +1,7 @@
 import express from 'express'
 import userAuthRouter from './router/userAuth.router.js'
 import toursApiRouter from './router/toursApi.router.js' 
+import filesApiRouter from './router/upload.router.js' 
 import cors from 'cors'
 import dotenv from 'dotenv'
 import path from 'path';
@@ -9,6 +10,7 @@ import logger from './utils/logger.js'
 const __dirname = path.resolve();
 dotenv.config()
 
+global.__basedir = __dirname;
 const app = express()
 
 app.use(cors())
@@ -17,6 +19,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static("public"));
 app.use('/user', userAuthRouter)
+app.use('/filesystem', filesApiRouter)
 
 app.use("/api/tours", toursApiRouter); 
 //app.use("/home", pageRouter); 
