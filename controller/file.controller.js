@@ -1,12 +1,13 @@
 import multer from "multer";
 import { MongoClient } from 'mongodb';    
 import config from '../utils/config.js'
-const url = config.db.url;
-const baseUrl = "http://localhost:9001/files/";
-const mongoClient = new MongoClient(url); 
+const url = config.db.url; 
+const mongoClient = new MongoClient(url);   
 import { GridFsStorage } from 'multer-gridfs-storage'; 
- 
- 
+import mongodb from 'mongodb'
+import fs from 'fs'
+await mongoClient.connect();
+      const db = mongoClient.db(config.db.dbName); 
 const storage = new GridFsStorage({
     url: config.db.url,
     file: (req, file) => {
@@ -26,20 +27,60 @@ const storage = new GridFsStorage({
       await mongoClient.connect();
       const database = mongoClient.db(config.db.dbName);
       const images = database.collection(config.db.imgBucket + ".files");
-      const cursor = images.find({});
-      if ((await cursor.count()) === 0) {
-        return res.status(500).send({
-          message: "No files found!",
-        });
-      }
-      let fileInfos = [];
-      await cursor.forEach((doc) => {
-        fileInfos.push({
-          name: doc.filename,
-          url: baseUrl + doc.filename,
-        });
+      const cursor = images.find({}).toArray((err, files)=>{
+        if(!files || files.length === 0){
+          return res.status(400).json({
+            err: "No files found!",
+          });
+        }
+        return res.json(files)
       });
-      return res.status(200).send(fileInfos);
+     
+      
+    } catch (error) {
+      return res.status(500).send({
+        message: error.message,
+      });
+    }
+  };
+  const getFile = async (req, res) => {
+    try {
+      await mongoClient.connect();
+      const database = mongoClient.db(config.db.dbName);
+      const images = database.collection(config.db.imgBucket + ".files");
+      const cursor = images.findOne({filename: req.params.filename}, (err, file) =>{
+        if(!file || file.length === 0){
+          return res.status(400).json({
+            err: "No files found!",
+          });
+        }
+        return res.json(file)
+      });
+     
+      
+    } catch (error) {
+      return res.status(500).send({
+        message: error.message,
+      });
+    }
+  };
+  const getImage = async (req, res) => {
+    try {
+      await mongoClient.connect();
+      const database = mongoClient.db(config.db.dbName);
+      const images = database.collection(config.db.imgBucket + ".files");
+      const cursor = images.findOne({filename: req.params.filename}, (err, file) =>{
+        if(!file || file.length === 0){
+          return res.status(400).json({
+            err: "No se encontraron archivos",
+          });
+        }  
+        bucket.openDownloadStreamByName(file.filename).
+     pipe(fs.createWriteStream('./outputFile'));
+        }
+      );
+     
+      
     } catch (error) {
       return res.status(500).send({
         message: error.message,
@@ -50,7 +91,7 @@ const storage = new GridFsStorage({
     try {
       await mongoClient.connect();
       const database = mongoClient.db(config.db.dbName);
-      const bucket = new GridFSBucket(database, {
+      const bucket = new mongodb.GridFSBucket(db, {
         bucketName: config.db.imgBucket,
       });
       let downloadStream = bucket.openDownloadStreamByName(req.params.name);
@@ -72,5 +113,6 @@ const storage = new GridFsStorage({
 export default   { 
   getListFiles,
   download,
-  upload
+  upload,
+  getFile,getImage
 };
