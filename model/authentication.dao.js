@@ -45,7 +45,45 @@ async function login(email, password) {
  * @param {Object} user 
  * @returns {Promise}
  */
-async function register(user) {
+async function registerGuide(guide) {
+    return connection(async function (db) {
+        const oldUser = await db.collection('Users').findOne({
+            email: guide.email
+        })
+        if (!oldUser) {
+            const salt = await bcrypt.genSalt(10)
+            const password = await bcrypt.hash(guide.password, salt)
+
+            await db.collection('Users').insertOne({
+                name: guide.name,
+                email: guide.email,
+
+                rol: 'guide',
+                password: password
+            }).catch(function (err) {
+
+                res.status(500).json({
+                    error: 500,
+                    msg: `Ocurrió un error inesperado ${err}`
+                })
+
+            })
+
+        } else {
+            throw {
+                error: 400,
+                msg: "El usuario ya existe en nuestros registros."
+            }
+        }
+    })
+}
+/**
+ * Llama a la conexión con la base de datos para registrar al usuario con las credenciales enviadas por parámetro
+ * 
+ * @param {Object} user 
+ * @returns {Promise}
+ */
+async function registerUser(user) {
     return connection(async function (db) {
         const oldUser = await db.collection('Users').findOne({
             email: user.email
@@ -150,6 +188,6 @@ export default {
     login,
     resetPass,
     generatePass,
-    register,
-    findAll
+    registerGuide,
+    findAll,registerUser
 }

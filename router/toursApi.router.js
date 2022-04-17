@@ -2,7 +2,7 @@ import express from 'express'
 import config from '../utils/config.js'
 import toursApiController from '../controller/toursApi.controller.js'
 import { validator } from '../middleware/validatorToken.js'
-import { admin_validator } from '../middleware/admin_validator.js'
+import { guide_validator } from '../middleware/admin_validator.js'
 
 const route = express.Router()
 

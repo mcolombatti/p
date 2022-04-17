@@ -28,8 +28,7 @@ function Login({ onLogin }) {
             toast.error('Hubo un problema al iniciar sesion. Intente nuevamente')
             console.error(error)
         })
-        console.log(email)
-        if(email != 'admin@email.com')
+        
         {API.user(email  )
         .then(function(data) {
             console.log(data[0]._id)

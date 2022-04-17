@@ -8,14 +8,14 @@ import jwt from 'jsonwebtoken'
  * @param next 
  * @returns 
  */
-export function admin_validator(req, res, next){
+export function guide_validator(req, res, next){
     const token = req.header('auth-token')
 
     if (token){
         try {
             const userData = jwt.verify(token, "SECRETO")
             req.user = userData
-            if(req.user.rol == 'admin'){
+            if(req.user.rol == 'guide'){
              
                 next()
             }
@@ -32,5 +32,5 @@ export function admin_validator(req, res, next){
 }
   
 export default {
-    admin_validator 
+    guide_validator 
 }

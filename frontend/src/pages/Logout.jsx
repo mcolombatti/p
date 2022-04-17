@@ -17,7 +17,7 @@ function Logout({ onLogout }) {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
             dispatch({ type: 'LOGOUT', payload: ['token', 'user'] }) 
-            navigate('/login')
+            navigate('/auth/guide/login')
         }  
     return (
        

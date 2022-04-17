@@ -18,7 +18,7 @@ import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
 import Tours from './pages/ToursVistaAdmin';
 import DetailsTour from './pages/TourVistaAdmin';
-import Home from './pages/Home'
+import Dashboard from './pages/Dashboard'
 import { useAuth } from './context/Auth.Context'
 import { style } from '@mui/system';
 
@@ -26,12 +26,12 @@ import { useParams } from 'react-router-dom'
 
 function AuthRoute({ children }) {
   const { state } = useAuth()
-  return state.isAuthenticated ? children : <Navigate to="/login" />
+  return state.isAuthenticated ? children : <Navigate to="auth/guide/login" />
 }
 
 function AuthRole({ children }) {
   const { state } = useAuth()
-  return (state.user.rol == 'admin') ? children : <Navigate to="/login" />
+  return (state.user.rol == 'guide') ? children : <Navigate to="auth/guide/login" />
 }
 
 function NavAuth({ children }) {
@@ -46,11 +46,11 @@ function NoNavAuth({ children }) {
 
 function NavRole({ children }) {
   const { state } = useAuth()
-  return (state.user.rol == 'admin') ? children : null
+  return (state.user.rol == 'guide') ? children : null
 }
-function NoNavRole({ children }) {
+function NoAuthRole({ children }) {
   const { state } = useAuth()
-  return (state.user.rol != 'admin') ? children : null
+  return (state.user.rol != 'guide') ? children : null
 }
 
 
@@ -66,7 +66,7 @@ function App(props) {
   useEffect(() => {
     if (auth.state.isAuthenticated) {
 
-      navigate('/')
+      navigate('/dashboard')
     }
   }, [auth.state])
 
@@ -98,14 +98,15 @@ function App(props) {
               </Typography>
               <div>
                 <NoNavAuth>
-                  <Button color="inherit"> <Link to="/">Home</Link></Button>
-                  <Button color="inherit"> <  Link to="/registrarse">Registrarse</Link></Button>
-                  <Button color="inherit"> <Link to="/login">Login</Link></Button>
+                 
+                  <Button color="inherit"> <  Link to="auth/guide/register">Registrarse</Link></Button>
+                  <Button color="inherit"> <Link to="auth/guide/login">Login</Link></Button>
 
                 </NoNavAuth>
                 <NavAuth>
-                  <NavRole> <Button color="inherit"> <Link to="/tours">Tours</Link></Button></NavRole>
-                   <Button color="inherit"> <Link to="/">Home</Link></Button>
+                <NavRole> <Button color="inherit"> <Link to="/dashboard">Dashboard</Link></Button>
+                  <Button color="inherit"> <Link to="/tours">Tours</Link></Button></NavRole>
+                   
                        <Logout /> 
 
                 </NavAuth>
@@ -118,9 +119,9 @@ function App(props) {
       </div>
       <div className="content">
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/registrarse" element={<Register />} />
+         <Route path="/dashboard" element={<AuthRoute> <AuthRole>  <Dashboard /></AuthRole> </AuthRoute>} />
+          <Route path="auth/guide/login" element={<Login />} />
+          <Route path="auth/guide/register" element={<Register />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password/:id/:token" element={<ResetPassword />} />
 

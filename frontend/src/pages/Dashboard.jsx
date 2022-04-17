@@ -2,7 +2,7 @@
 import {useState, useEffect } from 'react'
 import {   Link} from 'react-router-dom'
 import { useAuth } from '../context/Auth.Context'
-function Home(props){ 
+function Dashboard(props){ 
     
   const auth = useAuth()
   const [userName, setUserName] = useState('');
@@ -25,4 +25,4 @@ function Home(props){
         </div>
     )
 }
-export default Home;
+export default Dashboard;

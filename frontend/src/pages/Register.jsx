@@ -7,13 +7,14 @@ import { useAuth } from '../context/Auth.Context'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import * as API from '../api/api.auth'
-
+import { useNavigate } from 'react-router-dom'
 function Register({ onRegister }) {
     const { state, dispatch } = useAuth()
     const [ email, setEmail ] = useState('')
     const [ user, setUser ] = useState('')
     const [ password, setPassword ] = useState('')
 
+    let navigate = useNavigate();
     function onSubmit(event) {
         event.preventDefault()
 
@@ -22,10 +23,12 @@ function Register({ onRegister }) {
             localStorage.setItem('token', data.token)
             dispatch({ type: 'REGISTER', payload: data.user })
             toast.success("Registro exitoso");
+            
         })
         .catch(function(error){
             toast.error("Ocurrio un error al intentar registrar el usuario");
         })
+        navigate('/auth/guide/login')
     }
     return (
         <Container className="register" maxWidth="sm">

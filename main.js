@@ -18,7 +18,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static("public"));
-app.use('/user', userAuthRouter)
+app.use('/auth', userAuthRouter)
 app.use('/filesystem', filesApiRouter)
 
 app.use("/api/tours", toursApiRouter); 

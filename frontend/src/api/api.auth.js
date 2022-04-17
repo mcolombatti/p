@@ -1,7 +1,7 @@
 import config from '../config/config';
 
 export async function login(email, password) {
-    return fetch('http://localhost:9001/user/login', {
+    return fetch('http://localhost:9001/auth/guide/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -34,12 +34,12 @@ export async function login(email, password) {
             }
         })
 } export async function register(email, password, name) {
-    return fetch('http://localhost:9001/user/register', {
+    return fetch('http://localhost:9001/auth/guide/register', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ email, password, name })
+        body: JSON.stringify({ email, password, name})
     })
         .then(function (res) {
             if (res.status === 200) {
@@ -50,7 +50,7 @@ export async function login(email, password) {
             }
         })
 } export async function resetPassword(id, token, password, password2) {
-    return fetch(`http://localhost:9001/user/reset-password/${id}/${token}`, {
+    return fetch(`http://localhost:9001/auth/guide/reset-password/${id}/${token}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

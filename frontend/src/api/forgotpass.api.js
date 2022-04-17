@@ -1,6 +1,6 @@
  
  export async function forgotPassword(email) {
-    return fetch('http://localhost:9001/user/forgot-password', {
+    return fetch('http://localhost:9001/auth/guide/forgot-password', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

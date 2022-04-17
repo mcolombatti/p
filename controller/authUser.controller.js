@@ -58,17 +58,76 @@ const schemaLogin = yup.object({
  * @param res 
  */
 
-export function register(req, res) {
+export function registerGuide(req, res) {
     schema.validate(req.body)
         .then(function (data) {
-            authenticationDao.register(data)
+            authenticationDao.registerGuide(data)
                 .then(function () {
 
                     res.json({
                         msg: "Usuario registrado satisfactoriamente"
                     })
-                    const link = 'http://localhost:3000/login'
-                  /*  const mailConfigurations = {
+                   /* const link = 'http://localhost:3000/auth/guide/login'
+                    const mailConfigurations = {
+                        from: 'elmasi992@yahoo.com.ar',
+                        to: data.email,
+                        subject: 'Sending Email using Node.js',
+                        text: `Acabas de registrarte con éxito al portal de HR Connect. Haz click en el siguiente enlace para Iniciar sesión con tu usuario y comenzar a utilizar el portal de HR Connect</p>
+                ${link}`,
+                        template: 'bienvenida',
+                        context: {
+                            email: data.email,
+                            link: link,
+                            company: 'HR Connect'
+                        },
+                        attachments: [{
+                            filename: "bienvenida.jpg",
+                            path: "./email-template/images/bienvenida.jpg",
+                            cid: 'bienvenida'
+                        }],
+
+                    };
+
+                    transporter.sendMail(mailConfigurations, function (error, info) {
+                        if (error) throw Error(error);
+                        console.log('Email Sent Successfully');
+                        console.log(info);
+                    });*/
+                })
+                .catch(function (err) {
+                    if (err.error) {
+                        res.status(400).json({
+                            error: 400,
+                            msg: err.msg
+                        })
+                    } else {
+                        res.status(500).json({
+                            error: 500,
+                            msg: `Ocurrió un error inesperado ${err}`
+                        })
+                    }
+                })
+        })
+        .catch(function (err) {
+            res.status(400).json({
+                error: 400,
+                msg: `Error en los datos enviados al registrarse`,
+                err: err.error
+            })
+        })
+}
+
+export function registerUser(req, res) {
+    schema.validate(req.body)
+        .then(function (data) {
+            authenticationDao.registerUser(data)
+                .then(function () {
+
+                    res.json({
+                        msg: "Usuario registrado satisfactoriamente"
+                    })
+                   /* const link = 'http://localhost:3000/auth/guide/login'
+                    const mailConfigurations = {
                         from: 'elmasi992@yahoo.com.ar',
                         to: data.email,
                         subject: 'Sending Email using Node.js',
@@ -210,7 +269,7 @@ export function forgotPassword(req, res) {
                 name: data.name,
                 rol: data.rol
             })
-            const link = `http://localhost:3000/reset-password/${data.id}/${token}`;
+            const link = `http://localhost:3000/auth/guide/reset-password/${data.id}/${token}`;
 
 
 
@@ -290,7 +349,8 @@ export function resetPassword(req, res) {
 
 
 export default {
-    register,
+    registerGuide,
+    registerUser,
     forgotPassword,
     resetPassword,
     login,
